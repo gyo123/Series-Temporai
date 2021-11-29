@@ -1,0 +1,88 @@
+---
+title: "Series Temporais Linguagem R"
+Feito por Gyo123
+---
+
+
+
+
+```{r}
+#pacotes necessários para a elaboração do projeto
+library(tidyverse)
+library(forecast)
+
+#carregndo e atribuindo os dados em 'dataset'
+dataset <- AirPassengers
+dataset
+```
+
+```{r}
+#Demonstra o ano inicial do nosso 'dataset'
+start(dataset)
+```
+
+
+```{r}
+#demonstra o ano final do nosso 'dataset'
+end(dataset)
+```
+
+
+```{r}
+#demonstrando graficamente nossos dados
+plot(dataset)
+```
+// Percebemos um efeito sazonal 
+
+```{r}
+plot(aggregate(dataset))
+```
+// percebemos a tendência
+
+```{r}
+#Agora iremos extrair apenas um ano especifico com o metodo window
+ano1950 = window(dataset,start=c(1950,1), end=c(1950,12))
+plot(ano1950)
+```
+
+
+```{r}
+#Decomposção
+dec_dataset = decompose(dataset)
+dec_dataset
+```
+//Sazonal
+//Tendência
+//Aleatório
+
+
+
+```{r}
+attributes(dec_dataset)
+
+```
+
+
+```{r}
+#Demonstrando os dados citados acima em gráfico
+plot(dec_dataset)
+```
+
+
+```{r}
+#suavização exponencial
+ets = ets(dataset)
+ets
+```
+//Conforme explicado na apresentação, iremos utilizar essa classe para fazer uma previsão.
+
+```{r}
+#Previsão dos proximos 12 meses 
+previsao_dataset = forecast(ets, h=12)
+plot(previsao_dataset)
+```
+
+```{r}
+#deixando o gráfico mais visível e alterando algumas informações
+plot(previsao_dataset, main = 'PREVISÃO PARA OS PRÓXIMOS 12 MESES', xlab = "Ano", ylab = 'Passageiros', col = '#249E9F')
+```
