@@ -1,6 +1,7 @@
 ---
 title: "Series Temporais Linguagem R"
 Feito por Gyo123
+Data: 29/11/2021
 ---
 
 
